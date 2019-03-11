@@ -9,7 +9,4 @@ def toplambul(liste):
       if(sayi>enbuyuk):
         enbuyuk=sayi
     sayi=0
-  return enbuyuk
-
-ebt=toplambul(array)
-print(ebt)
+  print(enbuyuk)
