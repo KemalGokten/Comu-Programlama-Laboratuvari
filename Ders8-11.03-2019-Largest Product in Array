@@ -1,0 +1,15 @@
+array=[4,-3,2,-1,-2,6,-5]
+
+def toplambul(liste):
+  enbuyuk=0
+  sayi=0
+  for i in range(0,len(liste)):
+    for j in range(0,len(liste)):
+      sayi+=liste[j]
+      if(sayi>enbuyuk):
+        enbuyuk=sayi
+    sayi=0
+  return enbuyuk
+
+ebt=toplambul(array)
+print(ebt)
