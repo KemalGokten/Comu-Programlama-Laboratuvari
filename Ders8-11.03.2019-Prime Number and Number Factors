@@ -1,0 +1,11 @@
+def asalsayi(number):
+  dizi=[]
+  for i in range (2,number):
+    if(number%i==0):
+      dizi.append(i)
+  if(len(dizi)==0):
+      print("Sayi asal",number)
+  return dizi
+  
+array=asalsayi(13)
+print(array)
