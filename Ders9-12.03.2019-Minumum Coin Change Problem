@@ -1,0 +1,22 @@
+def mincoin(coin):
+  temp=coin
+  array=[50,25,21,10,5,1]
+  frekans=[0,0,0,0,0,0]
+  count=0
+  mincount=coin
+  for i in range(0,len(array)):
+    for j in range(i,len(array)):
+      while(temp//array[j]>0):
+        temp=temp-array[j]
+        frekans[j]+=1
+        count+=1
+    if(count<mincount):
+      mincount=count
+      frekans2=frekans
+    frekans=[0,0,0,0,0,0]
+    temp=coin
+    count=0
+  return frekans2
+
+no_coins=mincoin(210)
+print(no_coins)
