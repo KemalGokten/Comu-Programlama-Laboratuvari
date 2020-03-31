@@ -1,0 +1,44 @@
+# csv dosyalarını okumak için
+import pandas as pd
+
+# csv dosyamızı okuduk.
+data = pd.read_csv('voice.csv')
+
+# Bağımlı Değişkeni ( label ) bir değişkene atadık
+label = data.iloc[:,-1:].values
+
+# Veri kümemizi test ve train şekinde bölüyoruz
+from sklearn.cross_validation import train_test_split
+x_train, x_test, y_train, y_test = train_test_split(data.iloc[:,:-1],label,test_size=0.33,random_state=0)
+
+# SVC sınıfını import ettik ( Support Vector Classifier )
+from sklearn.svm import SVC
+
+# SVC sınıfından bir nesne ürettik
+# Parametre olarak farklı kernel trick tipleri verilebilir.
+# Başarı oranının değiştiği gözlemlenecektir. ( ‘linear’, ‘poly’, ‘rbf’, ‘sigmoid’, ‘precomputed’ )
+# kernelin default değeri 'rbf' dir.
+svc = SVC(kernel = 'poly')
+
+# Makineyi eğitiyoruz
+svc.fit(x_train,y_train)
+
+# Test veri kümemizi verdik ve cinsiyet tahmin etmesini sağladık
+result = svc.predict(x_test)
+
+
+from sklearn.metrics import confusion_matrix
+# Parametre olarak karşılaştıracağımız verileri giriyoruz.
+# y_test : Gerçek cinsiyet Test Verisi
+# result : x_test verisinden tahmin ettiğimiz cinsiyet verileri
+# Confusion Matrix Sonucu :
+# [[337 159]
+#  [113 437]]
+cm = confusion_matrix(y_test,result)
+print(cm)
+
+# Başarı Oranı
+from sklearn.metrics import accuracy_score
+accuracy = accuracy_score(y_test, result)
+# Sonuç : 0.739961759082218
+print(accuracy)
